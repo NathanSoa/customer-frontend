@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="grid min-h-screen grid-cols-app">
           <Sidebar />
-          <main>{children}</main>
+          <main className="px-2 py-3">{children}</main>
         </div>
       </body>
     </html>
