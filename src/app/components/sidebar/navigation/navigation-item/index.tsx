@@ -16,7 +16,7 @@ export default function NavigationItem({
   return (
     <a
       href={href}
-      className="group flex items-center gap-2 text-lg p-2 hover:bg-sky-500"
+      className="group flex items-center gap-2 p-2 text-lg hover:bg-sky-500"
     >
       <Icon size={24} />
       {title}

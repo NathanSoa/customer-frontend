@@ -2,7 +2,7 @@ import { AppleLogo } from 'phosphor-react'
 
 export default function Logo() {
   return (
-    <div className="flex items-center gap-2 text-xl mb-5 p-3">
+    <div className="mb-5 flex items-center gap-2 p-3 text-xl">
       <AppleLogo size={48} />
       MyCompany
     </div>
