@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import ActionSection from './action-section'
 
 interface TableProps {
   headers: string[]
@@ -29,23 +30,7 @@ export default function Table({ headers, data }: TableProps): ReactNode {
                 {cell}
               </td>
             ))}
-            <td className="p-tableCell">Algumas ações</td>
-          </tr>
-          <tr className="bg-white">
-            {data.map((cell, index) => (
-              <td className="p-tableCell" key={index}>
-                {cell}
-              </td>
-            ))}
-            <td className="p-tableCell">Algumas ações</td>
-          </tr>
-          <tr className="bg-white">
-            {data.map((cell, index) => (
-              <td className="p-tableCell" key={index}>
-                {cell}
-              </td>
-            ))}
-            <td className="p-tableCell">Algumas ações</td>
+            <ActionSection />
           </tr>
         </tbody>
       </table>
