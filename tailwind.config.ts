@@ -14,6 +14,9 @@ const config: Config = {
       gridTemplateColumns: {
         app: 'minmax(18rem, 20rem) 1fr',
       },
+      padding: {
+        tableCell: '0.75rem 1.25rem',
+      },
     },
   },
   plugins: [],
