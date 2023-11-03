@@ -1,8 +1,9 @@
 import { getCustomerDelayed } from '@/domain/customer/test-customer'
 import { Fragment } from 'react'
-import Breadcrumb from '../components/breadcrumb'
-import Title from '../components/title'
-import Table from '../components/table'
+
+import Breadcrumb from '@/app/components/breadcrumb'
+import Title from '@/app/components/title'
+import Table from '@/app/components/table'
 
 export default async function Page() {
   const testCustomer = await getCustomerDelayed()
