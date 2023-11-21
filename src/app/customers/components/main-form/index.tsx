@@ -53,11 +53,11 @@ export default function MainForm() {
         <AlignedInputs.Two>
           <InputContainer>
             <label htmlFor="ddd">DDD *</label>
-            <Input type="text" name="ddd" id="ddd" />
+            <Input type="text" name="ddd" id="ddd" maxLength={2} />
           </InputContainer>
           <InputContainer>
             <label htmlFor="phone">Telefone *</label>
-            <Input type="text" name="phone" id="phone" />
+            <Input type="text" name="phone" id="phone" maxLength={9} />
           </InputContainer>
         </AlignedInputs.Two>
       </AlignedInputs.Two>
