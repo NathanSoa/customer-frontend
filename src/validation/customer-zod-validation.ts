@@ -2,7 +2,7 @@ import { streetTypes } from '@/domain/customer/address/street-types'
 
 import { z } from 'zod'
 
-export const customerZodValidation = z.object({
+export const CustomerZodValidation = z.object({
   name: z
     .string()
     .min(2, {
@@ -202,6 +202,6 @@ export const AddressZodValidation = z.object({
   }),
 })
 
-export type CustomerFormParams = z.infer<typeof customerZodValidation>
+export type CustomerFormParams = z.infer<typeof CustomerZodValidation>
 export type CardFormParams = z.infer<typeof CardZodValidation>
 export type AddressFormParams = z.infer<typeof AddressZodValidation>
