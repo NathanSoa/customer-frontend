@@ -13,8 +13,18 @@ import Form from '@/app/components/form'
 import { useModal } from '@/app/hooks/useModal'
 import { useCustomer } from '@/app/hooks/useCustomer'
 
+import { Star, X } from 'phosphor-react'
+import classNames from 'classnames'
+
 export default function MainForm() {
-  const { customer, addAddress, addCard } = useCustomer()
+  const {
+    customer,
+    addAddress,
+    addCard,
+    removeCard,
+    removeAddress,
+    markCardAsMain,
+  } = useCustomer()
 
   const {
     showModal: showAddressModal,
@@ -29,7 +39,7 @@ export default function MainForm() {
   } = useModal()
 
   return (
-    <Form onSubmit={(e) => console.log('submitted')}>
+    <Form>
       <InputContainer>
         <label htmlFor="name">Nome *</label>
         <Input type="text" name="name" id="name" />
@@ -87,7 +97,13 @@ export default function MainForm() {
           {customer !== null &&
             customer.address.map((address, index) => (
               <InfoCard key={index}>
-                <div>{`${address.street}, nº ${address.number}`}</div>
+                <div className="flex justify-between">
+                  <span>{`${address.street}, nº ${address.number}`}</span>
+                  <X
+                    className="h-6 w-6 cursor-pointer hover:text-red-500"
+                    onClick={() => removeAddress(address)}
+                  />
+                </div>
                 <div>{`${address.neighborhood}, ${address.city} - ${address.country}`}</div>
                 <div>
                   {address.streetPurpose !== undefined &&
@@ -105,7 +121,23 @@ export default function MainForm() {
           {customer !== null &&
             customer.cards.map((card, index) => (
               <InfoCard key={index}>
-                <div>{card.flag}</div>
+                <div className="flex justify-between">
+                  <div className="flex items-center justify-center gap-2">
+                    <Star
+                      onClick={() => markCardAsMain(card)}
+                      className={classNames({
+                        'text-yellow-400': card.main === true,
+                        'text-gray-500': card.main === false,
+                        'h-6 w-6 cursor-pointer': true,
+                      })}
+                    ></Star>
+                    {card.flag}
+                  </div>
+                  <X
+                    className="h-6 w-6 cursor-pointer hover:text-red-500"
+                    onClick={() => removeCard(card)}
+                  />
+                </div>
                 <div>{card.number}</div>
                 <div>Titular: {card.name?.toLocaleUpperCase()}</div>
               </InfoCard>
