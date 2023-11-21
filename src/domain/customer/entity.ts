@@ -7,25 +7,25 @@ export interface Phone {
 }
 
 export interface Address {
-  type: string
-  streetType: string
-  street: string
-  number: string
-  neighborhood: string
-  city: string
-  state: string
-  country: string
-  zipCode: string
+  streetPurpose?: string[]
+  streetType?: string
+  street?: string
+  number?: string
+  neighborhood?: string
+  city?: string
+  state?: string
+  country?: string
+  zipCode?: string
   complement?: string
 }
 
 export interface Card {
-  type: string
-  name: string
-  number: string
-  securityCode: string
-  flag: string
-  main: boolean
+  type?: string
+  name?: string
+  number?: string
+  securityCode?: string
+  flag?: string
+  main?: boolean
 }
 
 export interface Customer extends BaseEntity {
@@ -36,5 +36,5 @@ export interface Customer extends BaseEntity {
   password: string
   phone: Phone
   address: Address[]
-  card: Card[]
+  cards: Card[]
 }
