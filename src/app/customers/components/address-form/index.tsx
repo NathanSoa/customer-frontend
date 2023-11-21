@@ -35,7 +35,7 @@ export default function AddressForm({ addAddress, close }: AddressFormProps) {
     e.preventDefault()
     const formLength = e.target.form.length
 
-    const data: Address = {}
+    const data: Partial<Address> = {}
 
     for (let i = 0; i < formLength; i++) {
       handleInputData(data, e.target.form[i])
@@ -44,7 +44,7 @@ export default function AddressForm({ addAddress, close }: AddressFormProps) {
     const success = validate(data)
 
     if (success) {
-      addAddress(data)
+      addAddress(data as Address)
       close()
     }
   }

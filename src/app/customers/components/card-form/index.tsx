@@ -35,7 +35,7 @@ export default function CardForm({ addCard, close }: CardFormProps) {
     e.preventDefault()
     const formLength = e.target.form.length
 
-    const data: Card = {}
+    const data: Partial<Card> = {}
 
     for (let i = 0; i < formLength; i++) {
       handleInputData(data, e.target.form[i])
@@ -44,7 +44,7 @@ export default function CardForm({ addCard, close }: CardFormProps) {
     const success = validate(data)
 
     if (success) {
-      addCard(data)
+      addCard(data as Card)
       close()
     }
   }
