@@ -1,12 +1,13 @@
 import { ReactNode } from 'react'
-import ActionSection from './action-section'
+
+import ActionSection from '@/app/components/table/action-section'
 
 interface TableProps {
   headers: string[]
-  data: any[]
+  children: ReactNode
 }
 
-export default function Table({ headers, data }: TableProps): ReactNode {
+export default function Table({ headers, children }: TableProps): ReactNode {
   return (
     <div className="relative max-w-7xl overflow-x-auto rounded-xl bg-gray-100 p-2">
       <table className="mx-0 w-full text-left">
@@ -15,24 +16,15 @@ export default function Table({ headers, data }: TableProps): ReactNode {
             {headers.map((header, index) => (
               <th
                 key={index}
-                className="p-tableCell whitespace-nowrap bg-white"
+                className="whitespace-nowrap bg-white p-tableCell"
               >
                 {header}
               </th>
             ))}
-            <th className="p-tableCell whitespace-nowrap bg-white">Ações</th>
+            <th className="whitespace-nowrap bg-white p-tableCell">Ações</th>
           </tr>
         </thead>
-        <tbody>
-          <tr className="bg-white">
-            {data.map((cell, index) => (
-              <td className="p-tableCell" key={index}>
-                {cell}
-              </td>
-            ))}
-            <ActionSection />
-          </tr>
-        </tbody>
+        <tbody>{children}</tbody>
       </table>
     </div>
   )
