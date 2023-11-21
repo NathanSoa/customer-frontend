@@ -2,18 +2,7 @@ import { Address, Card, Customer } from '@/domain/customer/entity'
 import { getCustomerDelayed2 } from '@/domain/customer/test-customer'
 import { useState } from 'react'
 
-interface UseCustomer {
-  customer: Customer | null
-  updateCustomer: (customer: Customer) => void
-  addAddress: (address: Address) => void
-  addCard: (card: Card) => void
-  editAddress: (address: Address) => void
-  editCard: (card: Card) => void
-  removeCard: (card: Card) => void
-  removeAddress: (address: Address) => void
-}
-
-export function useCustomer(): UseCustomer {
+export function useCustomer() {
   const [customer, setCustomer] = useState<Customer | null>(
     getCustomerDelayed2(),
   )
@@ -29,6 +18,7 @@ export function useCustomer(): UseCustomer {
 
   function addCard(card: Card) {
     if (!customer) return
+
     setCustomer({
       ...customer,
       cards: [...customer.cards, card],
@@ -51,6 +41,7 @@ export function useCustomer(): UseCustomer {
 
   function editCard(card: Card) {
     if (!customer) return
+
     setCustomer({
       ...customer,
       cards: customer.cards.map((c) => (c.number === card.number ? card : c)),
@@ -73,9 +64,28 @@ export function useCustomer(): UseCustomer {
     })
   }
 
+  function markCardAsMain(card: Card) {
+    if (!customer) return
+
+    const mainCard = customer.cards.find((c) => c.number === card.number)
+
+    if (!mainCard) return
+
+    customer.cards.forEach((c) => {
+      c.main = false
+      editCard(c)
+    })
+
+    if (mainCard.number === card.number) {
+      mainCard.main = true
+      editCard(mainCard)
+    }
+  }
+
   return {
     customer,
     updateCustomer,
+    markCardAsMain,
     addAddress,
     addCard,
     editAddress,
