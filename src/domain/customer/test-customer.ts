@@ -1,30 +1,31 @@
+import { Customer } from './entity'
+
 const testCustomer = {
   id: 'test-id',
+  active: true,
   name: 'Customer de Souza',
-  birthdate: '1990-01-01',
-  CPF: '123.456.789-10',
-  cellphone: {
+  birthdate: new Date('1990-01-01'),
+  cpf: '123.456.789-10',
+  phone: {
     type: 'mobile',
-    DDD: '11',
+    ddd: '11',
     number: '91234-5678',
   },
   email: 'customer@gmail.com',
   password: 'any_password',
   cards: [
     {
+      type: 'credit',
       number: '1234 5678 9012 3456',
       name: 'Customer de Souza',
       securityCode: '123',
-      flag: {
-        id: 'visa',
-        name: 'Visa',
-      },
+      flag: 'Visa',
       main: true,
     },
   ],
   address: [
     {
-      type: ['cobranca', 'entrega'],
+      streetPurpose: ['Cobrança', 'Entrega'],
       streetType: 'Avenida',
       street: 'Avenida Paulista',
       number: '1000',
@@ -38,10 +39,10 @@ const testCustomer = {
   ],
 }
 
-export async function getCustomerDelayed(): Promise<typeof testCustomer> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(testCustomer)
-    }, 1000)
-  })
+export function getCustomerDelayed(): Customer[] {
+  return [testCustomer, testCustomer]
+}
+
+export function getCustomerDelayed2(): Customer {
+  return testCustomer
 }
