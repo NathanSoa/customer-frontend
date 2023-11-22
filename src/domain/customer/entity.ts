@@ -45,6 +45,7 @@ export interface CustomerCreate {
   birthdate: Date
   email: string
   password: string
+  passwordConfirm: string
   phone: string
   ddd: string
   address: Address[]
