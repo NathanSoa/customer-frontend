@@ -15,7 +15,7 @@ const testCustomer = {
   password: 'any_password',
   cards: [
     {
-      type: 'credit',
+      type: 'Crédito',
       number: '1234 5678 9012 3456',
       name: 'Customer de Souza',
       securityCode: '123',
