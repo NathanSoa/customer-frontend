@@ -9,7 +9,7 @@ interface ButtonProps {
 function GreenButton({ children, onClick, type = 'button' }: ButtonProps) {
   return (
     <button
-      className="base-button bg-green-500 hover:bg-green-400"
+      className="base-button border-green-500 text-green-500 hover:bg-green-500"
       type={type}
       onClick={onClick}
     >
@@ -21,7 +21,7 @@ function GreenButton({ children, onClick, type = 'button' }: ButtonProps) {
 function BlueButton({ children, onClick, type = 'button' }: ButtonProps) {
   return (
     <button
-      className="base-button bg-blue-500 hover:bg-blue-400"
+      className="base-button border-blue-500 text-blue-500 hover:bg-blue-500"
       type={type}
       onClick={onClick}
     >
@@ -33,7 +33,7 @@ function BlueButton({ children, onClick, type = 'button' }: ButtonProps) {
 function RedButton({ children, onClick, type = 'button' }: ButtonProps) {
   return (
     <button
-      className="base-button bg-red-500 hover:bg-red-400"
+      className="base-button border-red-500 text-red-500 hover:bg-red-500"
       type={type}
       onClick={onClick}
     >

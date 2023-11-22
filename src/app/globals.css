@@ -4,6 +4,6 @@
 
 @layer components {
   .base-button {
-    @apply flex max-h-10 items-center justify-center gap-2 rounded-lg p-2 text-white;
+    @apply flex max-h-10 items-center justify-center gap-2 rounded-lg p-2 border-2 transition-colors duration-300 hover:text-white;
   }
 }
