@@ -16,13 +16,18 @@ import { useValidator } from '@/app/hooks/useValidator'
 
 import { CustomerZodValidation } from '@/validation/customer-zod-validation'
 
-import { Customer, CustomerCreate } from '@/domain/customer/entity'
+import { CustomerCreate } from '@/domain/customer/entity'
 
 import { handleInputData } from '@/utils/handle-input-data'
 
 import { Star, X } from 'phosphor-react'
 import classNames from 'classnames'
 import { useEffect, useState } from 'react'
+import {
+  normalizeCPF,
+  normalizeDate,
+  normalizePhoneNumber,
+} from '@/utils/normalizers'
 
 export default function MainForm() {
   const {
@@ -47,7 +52,10 @@ export default function MainForm() {
   } = useModal()
 
   const [renderErrors, setRenderErrors] = useState<any>({})
-  const { validate, errors } = useValidator(CustomerZodValidation)
+  const { validate, errors, addError } = useValidator(CustomerZodValidation)
+  const [phone, setPhone] = useState('')
+  const [date, setDate] = useState('')
+  const [cpf, setCpf] = useState('')
 
   function handleSubmit(e: any) {
     e.preventDefault()
@@ -59,22 +67,15 @@ export default function MainForm() {
       handleInputData(formData, e.target.form[i])
     }
 
-    const data = {
+    const success = validate({
       ...formData,
-      address: customer?.address,
       cards: customer?.cards,
-      phone: {
-        type: 'Celular',
-        ddd: formData.ddd,
-        number: formData.phone,
-      },
-      ddd: undefined,
-      'password-confirm': undefined,
+      address: customer?.address,
+    })
+
+    if (formData.passwordConfirm !== formData.password) {
+      addError('passwordConfirm', 'As senhas não coincidem')
     }
-
-    console.log(data)
-
-    const success = validate(data)
 
     if (success) {
       console.log('Sucesso')
@@ -104,7 +105,13 @@ export default function MainForm() {
           {renderErrors.cpf && (
             <span className="text-sm text-red-500">{renderErrors.cpf}</span>
           )}
-          <Input type="cpf" name="cpf" id="cpf" />
+          <Input
+            type="cpf"
+            name="cpf"
+            id="cpf"
+            value={cpf}
+            onChange={(e) => setCpf(normalizeCPF(e.target.value))}
+          />
         </InputContainer>
         <AlignedInputs.Two>
           <InputContainer>
@@ -119,7 +126,14 @@ export default function MainForm() {
             {renderErrors.phone && (
               <span className="text-sm text-red-500">{renderErrors.phone}</span>
             )}
-            <Input type="text" name="phone" id="phone" maxLength={9} />
+            <Input
+              type="text"
+              name="phone"
+              id="phone"
+              maxLength={10}
+              value={phone}
+              onChange={(e) => setPhone(normalizePhoneNumber(e.target.value))}
+            />
           </InputContainer>
         </AlignedInputs.Two>
       </AlignedInputs.Two>
@@ -139,7 +153,13 @@ export default function MainForm() {
               {renderErrors.birthdate}
             </span>
           )}
-          <Input type="text" name="birthdate" id="birthdate" />
+          <Input
+            type="text"
+            name="birthdate"
+            id="birthdate"
+            value={date}
+            onChange={(e) => setDate(normalizeDate(e.target.value))}
+          />
         </InputContainer>
       </AlignedInputs.Two>
 
@@ -154,17 +174,13 @@ export default function MainForm() {
           <Input type="password" name="password" id="password" />
         </InputContainer>
         <InputContainer>
-          <label htmlFor="password-confirm">Confirme a senha *</label>
-          {renderErrors['password-confirm'] && (
+          <label htmlFor="passwordConfirm">Confirme a senha *</label>
+          {renderErrors.passwordConfirm && (
             <span className="text-sm text-red-500">
-              {renderErrors['password-confirm']}
+              {renderErrors.passwordConfirm}
             </span>
           )}
-          <Input
-            type="password"
-            name="password-confirm"
-            id="password-confirm"
-          />
+          <Input type="password" name="passwordConfirm" id="passwordConfirm" />
         </InputContainer>
       </AlignedInputs.Two>
 
