@@ -16,20 +16,28 @@ import { useValidator } from '@/app/hooks/useValidator'
 
 import { CustomerZodValidation } from '@/validation/customer-zod-validation'
 
-import { CustomerCreate } from '@/domain/customer/entity'
+import { Customer, CustomerCreate } from '@/domain/customer/entity'
 
 import { handleInputData } from '@/utils/handle-input-data'
-
-import { Star, X } from 'phosphor-react'
-import classNames from 'classnames'
-import { useEffect, useState } from 'react'
 import {
   normalizeCPF,
   normalizeDate,
   normalizePhoneNumber,
 } from '@/utils/normalizers'
 
-export default function MainForm() {
+import { Star, X } from 'phosphor-react'
+import classNames from 'classnames'
+import { useEffect, useState } from 'react'
+
+interface MainFormProps {
+  baseCustomer?: Customer | null
+  close: () => void
+}
+
+export default function MainForm({
+  baseCustomer = null,
+  close,
+}: MainFormProps) {
   const {
     customer,
     addAddress,
@@ -78,8 +86,8 @@ export default function MainForm() {
     }
 
     if (success) {
-      console.log('Sucesso')
       close()
+      console.log('Sucesso')
     }
   }
 
@@ -193,7 +201,7 @@ export default function MainForm() {
           É necessário ter um endreço de cobrança e de entrega
         </div>
         <div className="grid grid-cols-aligned-itens-2 gap-1 py-2">
-          {customer !== null &&
+          {customer !== undefined &&
             customer.address.map((address, index) => (
               <InfoCard key={index}>
                 <div className="flex justify-between">
@@ -220,7 +228,7 @@ export default function MainForm() {
           <span className="text-sm text-red-500">{renderErrors.cards}</span>
         )}
         <div className="grid grid-cols-aligned-itens-3 gap-1 py-2">
-          {customer !== null &&
+          {customer !== undefined &&
             customer.cards.map((card, index) => (
               <InfoCard key={index}>
                 <div className="flex justify-between">

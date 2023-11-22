@@ -49,7 +49,7 @@ export default function Page() {
 
       {showModal && (
         <Modal title="Cadastrar cliente" onHide={closeModal}>
-          <MainForm />
+          <MainForm close={closeModal} />
         </Modal>
       )}
     </div>
