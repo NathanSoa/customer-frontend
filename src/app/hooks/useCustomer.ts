@@ -87,6 +87,7 @@ export function useCustomer() {
 
   return {
     customer,
+    setCustomer,
     updateCustomer,
     markCardAsMain,
     addAddress,
