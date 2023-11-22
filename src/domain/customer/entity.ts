@@ -51,3 +51,20 @@ export interface CustomerCreate {
   address: Address[]
   cards: Card[]
 }
+
+export const EmptyCustomer: Customer = {
+  id: '',
+  name: '',
+  cpf: '',
+  birthdate: new Date(),
+  email: '',
+  password: '',
+  phone: {
+    type: '',
+    ddd: '',
+    number: '',
+  },
+  address: [],
+  cards: [],
+  active: true,
+}
