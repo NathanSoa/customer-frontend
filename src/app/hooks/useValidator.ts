@@ -19,8 +19,13 @@ export function useValidator(zodValidator: z.ZodObject<any>) {
     }
   }
 
+  function addError(key: string, message: string) {
+    setErrors((prev: any) => ({ ...prev, [key]: message }))
+  }
+
   return {
     errors,
+    addError,
     validate,
     setValidator,
   }
