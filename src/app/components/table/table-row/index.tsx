@@ -1,4 +1,6 @@
 import DeleteModal from '@/app/components/delete-modal'
+import Modal from '@/app/components/modal'
+import MainForm from '@/app/customers/components/main-form'
 
 import { useModal } from '@/app/hooks/useModal'
 
@@ -17,6 +19,12 @@ export default function TableBody({ data }: TableBodyProps) {
     openModal: openDeletModal,
   } = useModal()
 
+  const {
+    showModal: showEditModal,
+    closeModal: closeEditModal,
+    openModal: openEditModal,
+  } = useModal()
+
   const dataToDisplay = getDataToDisplay(data)
 
   return (
@@ -32,6 +40,7 @@ export default function TableBody({ data }: TableBodyProps) {
             size={24}
             alt="Editar"
             className="cursor-pointer hover:text-green-400"
+            onClick={openEditModal}
           />
           <Trash
             size={24}
@@ -50,6 +59,11 @@ export default function TableBody({ data }: TableBodyProps) {
             entityId={data.id}
             entityName={data.name}
           />
+        )}
+        {showEditModal && (
+          <Modal title="Editar cliente" onHide={closeEditModal}>
+            <MainForm close={closeEditModal} id={data.id} />
+          </Modal>
         )}
       </td>
     </tr>
