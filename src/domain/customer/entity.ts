@@ -38,3 +38,15 @@ export interface Customer extends BaseEntity {
   address: Address[]
   cards: Card[]
 }
+
+export interface CustomerCreate {
+  name: string
+  cpf: string
+  birthdate: Date
+  email: string
+  password: string
+  phone: string
+  ddd: string
+  address: Address[]
+  cards: Card[]
+}
