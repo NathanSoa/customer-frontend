@@ -35,7 +35,12 @@ export default function Page() {
           const formattedPhone = `(${customer.phone.ddd}) ${customer.phone.number}`
           return (
             <TableRow
-              data={[customer.name, customer.email, formattedPhone]}
+              data={{
+                id: customer.id,
+                name: customer.name,
+                email: customer.email,
+                phone: formattedPhone,
+              }}
               key={index}
             />
           )
