@@ -31,7 +31,7 @@ export interface Card {
 export interface Customer extends BaseEntity {
   name: string
   cpf: string
-  birthdate: Date
+  birthdate: string
   email: string
   password: string
   phone: Phone
@@ -42,7 +42,7 @@ export interface Customer extends BaseEntity {
 export interface CustomerCreate {
   name: string
   cpf: string
-  birthdate: Date
+  birthdate: string
   email: string
   password: string
   passwordConfirm: string
@@ -56,7 +56,7 @@ export const EmptyCustomer: Customer = {
   id: '',
   name: '',
   cpf: '',
-  birthdate: new Date(),
+  birthdate: '',
   email: '',
   password: '',
   phone: {
