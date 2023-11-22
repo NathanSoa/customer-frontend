@@ -125,7 +125,6 @@ export const CustomerZodValidation = z.object({
     .max(255, {
       message: 'Senha precisa ter entre 8 e 255 caracteres',
     }),
-  passwordConfirmation: z.string().min(8).max(255),
 })
 
 export const CardZodValidation = z.object({
