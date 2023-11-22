@@ -15,7 +15,11 @@ import { getCustomerDelayed } from '@/domain/customer/test-customer'
 import { PlusCircle } from 'phosphor-react'
 
 export default function Page() {
-  const { showModal, closeModal, openModal } = useModal()
+  const {
+    showModal: showCreateModal,
+    closeModal: closeCreateModal,
+    openModal: openCreateModal,
+  } = useModal()
 
   const customers = getCustomerDelayed()
 
@@ -25,7 +29,7 @@ export default function Page() {
       <div className="mb-2 h-1 border-b-2 border-b-gray-500" />
       <div className="flex items-center gap-6 py-3">
         <Title>Clientes</Title>
-        <Button.Blue onClick={openModal}>
+        <Button.Blue onClick={openCreateModal}>
           <PlusCircle size={32} />
           <span className="upper font-semibold">Novo cliente</span>
         </Button.Blue>
@@ -47,9 +51,9 @@ export default function Page() {
         })}
       </Table>
 
-      {showModal && (
-        <Modal title="Cadastrar cliente" onHide={closeModal}>
-          <MainForm close={closeModal} />
+      {showCreateModal && (
+        <Modal title="Cadastrar cliente" onHide={closeCreateModal}>
+          <MainForm close={closeCreateModal} />
         </Modal>
       )}
     </div>
