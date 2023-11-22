@@ -1,11 +1,14 @@
-import { Address, Card, Customer } from '@/domain/customer/entity'
-import { getCustomerDelayed2 } from '@/domain/customer/test-customer'
+import {
+  Address,
+  Card,
+  Customer,
+  EmptyCustomer,
+} from '@/domain/customer/entity'
+
 import { useState } from 'react'
 
 export function useCustomer() {
-  const [customer, setCustomer] = useState<Customer | null>(
-    getCustomerDelayed2(),
-  )
+  const [customer, setCustomer] = useState<Customer>(EmptyCustomer)
 
   function addAddress(address: Address) {
     if (!customer) return
@@ -21,7 +24,7 @@ export function useCustomer() {
 
     setCustomer({
       ...customer,
-      cards: [...customer.cards, card],
+      cards: [...customer.cards, { ...card, main: false }],
     })
   }
 
