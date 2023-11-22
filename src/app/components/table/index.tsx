@@ -1,7 +1,5 @@
 import { ReactNode } from 'react'
 
-import ActionSection from '@/app/components/table/action-section'
-
 interface TableProps {
   headers: string[]
   children: ReactNode
