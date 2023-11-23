@@ -16,6 +16,7 @@ export interface Address {
   state: string
   country: string
   zipCode: string
+  alias: string
   complement: string
 }
 

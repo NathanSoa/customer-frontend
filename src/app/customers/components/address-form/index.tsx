@@ -17,7 +17,7 @@ import { Address } from '@/domain/customer/entity'
 import { streetTypes } from '@/domain/customer/address/street-types'
 import { states } from '@/domain/customer/address/states'
 
-import { AddressZodValidation } from '@/validation/customer-zod-validation'
+import { AddressZodValidation } from '@/validation/address-zod-validation'
 
 import { useEffect, useState } from 'react'
 
@@ -134,6 +134,11 @@ export default function AddressForm({ addAddress, close }: AddressFormProps) {
           />
         </InputContainer>
       </AlignedInputs.Two>
+
+      <InputContainer>
+        <label htmlFor="alias">Apelido *</label>
+        <Input type="text" name="alias" id="alias" />
+      </InputContainer>
 
       <InputContainer>
         <label htmlFor="complement">Complemento</label>
