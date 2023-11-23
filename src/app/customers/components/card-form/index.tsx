@@ -15,7 +15,7 @@ import { Card } from '@/domain/customer/entity'
 import { handleInputData } from '@/utils/handle-input-data'
 import { normalizeCardNumber } from '@/utils/normalizers'
 
-import { CardZodValidation } from '@/validation/customer-zod-validation'
+import { CardZodValidation } from '@/validation/card-zod-validation'
 
 import { useEffect, useState } from 'react'
 
