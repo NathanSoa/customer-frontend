@@ -11,7 +11,7 @@ export default function Navigation(): ReactNode {
           <NavigationItem href="/" title="Home" Icon={House} />
         </li>
         <li>
-          <NavigationItem href="/customers" title="Customers" Icon={User} />
+          <NavigationItem href="/customers" title="Clientes" Icon={User} />
         </li>
       </ul>
     </nav>
