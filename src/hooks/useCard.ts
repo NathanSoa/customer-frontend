@@ -1,28 +1,25 @@
+import { env } from '@/config/environment'
+import { http } from '@/infra/http-fetch'
 import { useEffect, useState } from 'react'
 
 interface Flag {
-  id: number
   name: string
+}
+
+const getFlags = async (): Promise<Flag[]> => {
+  return await http<Flag[]>({
+    url: `${env.API_URL}/cardFlags`,
+    method: 'GET',
+  })
 }
 
 export function useCard() {
   const [flags, setFlags] = useState<Flag[]>([])
 
   useEffect(() => {
-    setFlags([
-      {
-        id: 1,
-        name: 'Visa',
-      },
-      {
-        id: 2,
-        name: 'MasterCard',
-      },
-      {
-        id: 3,
-        name: 'Elo',
-      },
-    ])
+    getFlags().then((response) => {
+      setFlags(response)
+    })
   }, [])
 
   return { flags }
