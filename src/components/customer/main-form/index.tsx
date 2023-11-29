@@ -98,6 +98,7 @@ export default function MainForm({ close }: MainFormProps) {
       })
         .then(() => {
           close()
+          document.location.reload()
         })
         .catch((err) => {
           console.log('erro', err)
