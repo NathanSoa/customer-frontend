@@ -21,9 +21,4 @@ export const CardZodValidation = z.object({
     .max(4, {
       message: 'Código de segurança precisa ter entre 3 e 4 caracteres',
     }),
-  flag: z.enum(['Visa', 'MasterCard', 'Elo'], {
-    errorMap: () => {
-      return { message: 'Selecione Visa, Mastercard ou Elo' }
-    },
-  }),
 })
