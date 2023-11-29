@@ -10,9 +10,10 @@ import { Pencil, Trash } from 'phosphor-react'
 
 interface TableBodyProps {
   data: any
+  handleDelete: (id: string) => void
 }
 
-export default function TableBody({ data }: TableBodyProps) {
+export default function TableBody({ data, handleDelete }: TableBodyProps) {
   const {
     showModal: showDeleteModal,
     closeModal: closeDeleteModal,
@@ -51,9 +52,7 @@ export default function TableBody({ data }: TableBodyProps) {
         </div>
         {showDeleteModal && (
           <DeleteModal
-            handleDelete={(id: string) => {
-              console.log(id)
-            }}
+            handleDelete={handleDelete}
             onHide={closeDeleteModal}
             title="Apagar Entidade"
             entityId={data.id}
