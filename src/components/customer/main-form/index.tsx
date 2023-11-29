@@ -10,6 +10,8 @@ import AddressForm from '@/components/customer/address-form'
 import CardForm from '@/components/customer/card-form'
 import Form from '@/components/form'
 
+import { env } from '@/config/environment'
+
 import { useModal } from '@/hooks/useModal'
 import { useCustomer } from '@/hooks/useCustomer'
 import { useValidator } from '@/hooks/useValidator'
@@ -17,7 +19,8 @@ import { useValidator } from '@/hooks/useValidator'
 import { CustomerZodValidation } from '@/validation/customer-zod-validation'
 
 import { CustomerCreate } from '@/domain/customer/entity'
-import { getCustomerDelayed2 } from '@/domain/customer/test-customer'
+
+import { http } from '@/infra/http-fetch'
 
 import { handleInputData } from '@/utils/handle-input-data'
 import {
@@ -31,14 +34,12 @@ import classNames from 'classnames'
 import { useEffect, useState } from 'react'
 
 interface MainFormProps {
-  id?: string | null
   close: () => void
 }
 
-export default function MainForm({ id = null, close }: MainFormProps) {
+export default function MainForm({ close }: MainFormProps) {
   const {
     customer,
-    setCustomer,
     addAddress,
     addCard,
     removeCard,
@@ -74,25 +75,41 @@ export default function MainForm({ id = null, close }: MainFormProps) {
       handleInputData(formData, e.target.form[i])
     }
 
-    const success = validate({
+    const customerObj = {
       ...formData,
       cards: customer?.cards,
       address: customer?.address,
-    })
+    }
+
+    const success = validate(customerObj)
 
     if (formData.passwordConfirm !== formData.password) {
       addError('passwordConfirm', 'As senhas não coincidem')
     }
 
+    customerObj.phone = `(${formData.ddd}) ${formData.phone}`
+    delete customerObj.ddd
+
     if (success) {
-      close()
-      console.log('Sucesso')
+      http({
+        url: `${env.API_URL}/customers`,
+        method: 'POST',
+        body: customerObj,
+      })
+        .then(() => {
+          close()
+        })
+        .catch((err) => {
+          console.log('erro', err)
+        })
     }
   }
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
       setRenderErrors(errors)
+    } else {
+      setRenderErrors({})
     }
   }, [errors])
 
@@ -167,6 +184,27 @@ export default function MainForm({ id = null, close }: MainFormProps) {
             value={date}
             onChange={(e) => setDate(normalizeDate(e.target.value))}
           />
+        </InputContainer>
+      </AlignedInputs.Two>
+
+      <AlignedInputs.Two>
+        <InputContainer>
+          <label htmlFor="password">Senha *</label>
+          {renderErrors.password && (
+            <span className="text-sm text-red-500">
+              {renderErrors.password}
+            </span>
+          )}
+          <Input type="password" name="password" id="password" />
+        </InputContainer>
+        <InputContainer>
+          <label htmlFor="passwordConfirm">Confirme a senha *</label>
+          {renderErrors.passwordConfirm && (
+            <span className="text-sm text-red-500">
+              {renderErrors.passwordConfirm}
+            </span>
+          )}
+          <Input type="password" name="passwordConfirm" id="passwordConfirm" />
         </InputContainer>
       </AlignedInputs.Two>
 
