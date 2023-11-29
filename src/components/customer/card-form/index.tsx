@@ -83,11 +83,18 @@ export default function CardForm({ addCard, close }: CardFormProps) {
           />
         </InputContainer>
         <InputContainer>
-          <label htmlFor="code">Código de segurança *</label>
-          {renderErrors.code && (
-            <span className="text-sm text-red-500">{renderErrors.code}</span>
+          <label htmlFor="securityCode">Código de segurança *</label>
+          {renderErrors.securityCode && (
+            <span className="text-sm text-red-500">
+              {renderErrors.securityCode}
+            </span>
           )}
-          <Input type="text" name="code" id="code" maxLength={4} />
+          <Input
+            type="text"
+            name="securityCode"
+            id="securityCode"
+            maxLength={4}
+          />
         </InputContainer>
       </AlignedInputs.Two>
 

@@ -13,7 +13,7 @@ export const CardZodValidation = z.object({
     .string()
     .min(2, { message: 'Nome precisa ter entre 2 e 255 caracteres' })
     .max(255, { message: 'Nome precisa ter entre 2 e 255 caracteres' }),
-  code: z
+  securityCode: z
     .string()
     .min(3, {
       message: 'Código de segurança precisa ter entre 3 e 4 caracteres',
