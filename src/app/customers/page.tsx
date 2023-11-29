@@ -1,17 +1,13 @@
 'use client'
 
-import Breadcrumb from '@/app/components/breadcrumb'
-import Title from '@/app/components/title'
-import Table from '@/app/components/table'
-import Modal from '@/app/components/modal'
-import TableRow from '@/app/components/table/table-row'
-import MainForm from '@/app/customers/components/main-form'
-import Button from '@/app/components/button'
+import Breadcrumb from '@/components/breadcrumb'
+import Title from '@/components/title'
+import Modal from '@/components/modal'
+import { MainTable } from '@/components/customer/main-table'
+import MainForm from '@/components/customer/main-form'
+import Button from '@/components/button'
 
-import { useModal } from '@/app/hooks/useModal'
-
-import { getCustomerDelayed } from '@/domain/customer/test-customer'
-
+import { useModal } from '@/hooks/useModal'
 import { PlusCircle } from 'phosphor-react'
 
 export default function Page() {
@@ -20,8 +16,6 @@ export default function Page() {
     closeModal: closeCreateModal,
     openModal: openCreateModal,
   } = useModal()
-
-  const customers = getCustomerDelayed()
 
   return (
     <div className="p-2">
@@ -34,23 +28,7 @@ export default function Page() {
           <span className="upper font-semibold">Novo cliente</span>
         </Button.Blue>
       </div>
-      <Table headers={['Nome', 'E-mail', 'Telefone']}>
-        {customers.map((customer, index) => {
-          const formattedPhone = `(${customer.phone.ddd}) ${customer.phone.number}`
-          return (
-            <TableRow
-              data={{
-                id: customer.id,
-                name: customer.name,
-                email: customer.email,
-                phone: formattedPhone,
-              }}
-              key={index}
-            />
-          )
-        })}
-      </Table>
-
+      <MainTable />
       {showCreateModal && (
         <Modal title="Cadastrar cliente" onHide={closeCreateModal}>
           <MainForm close={closeCreateModal} />
