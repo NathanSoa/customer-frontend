@@ -1,11 +1,5 @@
 import { BaseEntity } from '@/domain/common/base-entity'
 
-export interface Phone {
-  type: string
-  ddd: string
-  number: string
-}
-
 export interface Address {
   streetPurpose: string[]
   streetType: string
@@ -35,7 +29,7 @@ export interface Customer extends BaseEntity {
   birthdate: string
   email: string
   password: string
-  phone: Phone
+  phone: string
   address: Address[]
   cards: Card[]
 }
@@ -60,11 +54,7 @@ export const EmptyCustomer: Customer = {
   birthdate: '',
   email: '',
   password: '',
-  phone: {
-    type: '',
-    ddd: '',
-    number: '',
-  },
+  phone: '',
   address: [],
   cards: [],
   active: true,
