@@ -15,6 +15,14 @@ export const http = async <T>(options: FetchOptions): Promise<T> => {
     method,
     headers,
     body: JSON.stringify(body),
+    cache: 'no-cache',
   })
-  return await response.json()
+
+  try {
+    return await response.json()
+  } catch (err) {
+    if (err instanceof SyntaxError) {
+      return {} as T
+    }
+  }
 }
