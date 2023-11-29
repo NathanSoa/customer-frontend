@@ -1,22 +1,23 @@
 'use client'
 
-import Button from '@/app/components/button'
-import AlignedInputs from '@/app/components/aligned-inputs'
-import Input from '@/app/components/input'
-import InputContainer from '@/app/components/input-container'
-import InfoCard from '@/app/components/info-card'
-import Modal from '@/app/components/modal'
-import AddressForm from '@/app/customers/components/address-form'
-import CardForm from '@/app/customers/components/card-form'
-import Form from '@/app/components/form'
+import Button from '@/components/button'
+import AlignedInputs from '@/components/aligned-inputs'
+import Input from '@/components/input'
+import InputContainer from '@/components/input-container'
+import InfoCard from '@/components/info-card'
+import Modal from '@/components/modal'
+import AddressForm from '@/components/customer/address-form'
+import CardForm from '@/components/customer/card-form'
+import Form from '@/components/form'
 
-import { useModal } from '@/app/hooks/useModal'
-import { useCustomer } from '@/app/hooks/useCustomer'
-import { useValidator } from '@/app/hooks/useValidator'
+import { useModal } from '@/hooks/useModal'
+import { useCustomer } from '@/hooks/useCustomer'
+import { useValidator } from '@/hooks/useValidator'
 
 import { CustomerZodValidation } from '@/validation/customer-zod-validation'
 
-import { Customer, CustomerCreate } from '@/domain/customer/entity'
+import { CustomerCreate } from '@/domain/customer/entity'
+import { getCustomerDelayed2 } from '@/domain/customer/test-customer'
 
 import { handleInputData } from '@/utils/handle-input-data'
 import {
@@ -30,16 +31,14 @@ import classNames from 'classnames'
 import { useEffect, useState } from 'react'
 
 interface MainFormProps {
-  baseCustomer?: Customer | null
+  id?: string | null
   close: () => void
 }
 
-export default function MainForm({
-  baseCustomer = null,
-  close,
-}: MainFormProps) {
+export default function MainForm({ id = null, close }: MainFormProps) {
   const {
     customer,
+    setCustomer,
     addAddress,
     addCard,
     removeCard,
@@ -97,6 +96,16 @@ export default function MainForm({
     }
   }, [errors])
 
+  useEffect(() => {
+    if (typeof id === 'string') {
+      const customer = getCustomerDelayed2()
+      setCustomer(customer)
+      setCpf(customer.cpf)
+      setPhone(customer.phone.number)
+      setDate(customer.birthdate)
+    }
+  }, [])
+
   return (
     <Form>
       <InputContainer>
@@ -127,7 +136,13 @@ export default function MainForm({
             {renderErrors.ddd && (
               <span className="text-sm text-red-500">{renderErrors.ddd}</span>
             )}
-            <Input type="text" name="ddd" id="ddd" maxLength={2} />
+            <Input
+              type="text"
+              name="ddd"
+              id="ddd"
+              maxLength={2}
+              value={customer.phone.ddd ?? ''}
+            />
           </InputContainer>
           <InputContainer>
             <label htmlFor="phone">Telefone *</label>
@@ -152,7 +167,12 @@ export default function MainForm({
           {renderErrors.email && (
             <span className="text-sm text-red-500">{renderErrors.email}</span>
           )}
-          <Input type="email" name="email" id="email" />
+          <Input
+            type="email"
+            name="email"
+            id="email"
+            value={customer.email ?? ''}
+          />
         </InputContainer>
         <InputContainer>
           <label htmlFor="birthdate">Data de Nascimento *</label>

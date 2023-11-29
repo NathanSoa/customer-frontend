@@ -1,14 +1,14 @@
 'use client'
 
-import Button from '@/app/components/button'
-import Input from '@/app/components/input'
-import InputContainer from '@/app/components/input-container'
-import AlignedInputs from '@/app/components/aligned-inputs'
-import Form from '@/app/components/form'
-import SelectInput from '@/app/components/select-input'
-import CheckBoxContainer from '@/app/components/checkbox-container'
+import Button from '@/components/button'
+import Input from '@/components/input'
+import InputContainer from '@/components/input-container'
+import AlignedInputs from '@/components/aligned-inputs'
+import Form from '@/components/form'
+import SelectInput from '@/components/select-input'
+import CheckBoxContainer from '@/components/checkbox-container'
 
-import { useValidator } from '@/app/hooks/useValidator'
+import { useValidator } from '@/hooks/useValidator'
 
 import { normalizeCep } from '@/utils/normalizers'
 import { handleInputData } from '@/utils/handle-input-data'

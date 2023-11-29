@@ -1,5 +1,5 @@
-import Modal from '@/app/components/modal'
-import Button from '../button'
+import Modal from '@/components/modal'
+import Button from '@/components/button'
 
 interface DeleteModalProps {
   handleDelete: (id: string) => void

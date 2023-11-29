@@ -1,8 +1,8 @@
-import DeleteModal from '@/app/components/delete-modal'
-import Modal from '@/app/components/modal'
-import MainForm from '@/app/customers/components/main-form'
+import DeleteModal from '@/components/delete-modal'
+import Modal from '@/components/modal'
+import MainForm from '@/components/customer/main-form'
 
-import { useModal } from '@/app/hooks/useModal'
+import { useModal } from '@/hooks/useModal'
 
 import { getDataToDisplay } from '@/utils/get-data-to-display'
 
